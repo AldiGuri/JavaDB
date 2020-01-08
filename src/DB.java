@@ -14,27 +14,32 @@ public class DB {
         	//JDBC_DRIVER = "com.mysql.jdbc.Driver";
         	//Class.forName("com.mysql.jdbc.Driver");
 
-        	conn = DriverManager.getConnection(url, user, pass);
-        	    	
+        	conn = DriverManager.getConnection(url, user, pass);    	
         	stmt = conn.createStatement();
+        	
         	// drop database (safety check nqs ka db existente)
         	sql = "DROP DATABASE president";
         	stmt.executeUpdate(sql);
+        	
         	// create database president
         	sql = "CREATE DATABASE president";
         	stmt.executeUpdate(sql);
+        	
         	// select database president
         	sql = "USE president";
         	stmt.executeUpdate(sql);
+        	
         	// create table presidents
         	sql = "CREATE TABLE presidents (Pres_Name VARCHAR(30), Party VARCHAR(50) ,State_Name VARCHAR(50),Birth_Yr INTEGER, Yrs_Servic INTEGER ,Death_Age INTEGER)";
         	stmt.executeUpdate(sql);
+        	
         	// insert data into presidents
         	BufferedReader br = new BufferedReader(new FileReader("query.txt"));
         	sql = "";
         	while ((sql=br.readLine()) !=null) {        
         		stmt.executeUpdate(sql);
         	}
+        	
     // err handling     	
     }catch(SQLException se){
         
