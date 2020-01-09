@@ -6,6 +6,8 @@ public class DB {
 	private Connection conn = null;
     private Statement stmt = null;
     private String sql = "";
+    
+    public DB(){}
 
 	public DB(String url, String user, String pass) {
         
@@ -50,28 +52,16 @@ public class DB {
     }
 //    finally{
 //        
-//        try{
-//            if(stmt!=null)
-//                stmt.close();
-//        }catch(SQLException se2){
-//        	se2.printStackTrace();
-//        }
-//        try{
-//            if(conn!=null)
-//                conn.close();
-//        }catch(SQLException se){
-//            se.printStackTrace();
-//        }
-//    }
+        
 
 	}
 	
 	public String getPresident() {
 		 sql = "SELECT Pres_Name, Party, State_Name, Birth_Yr, Yrs_Servic, Death_Age FROM presidents";
-		 ResultSet rs;
+		
 		 String afishim = "";
-		try {
-			rs = stmt.executeQuery(sql);
+		 try {
+			ResultSet rs = stmt.executeQuery(sql);
 		
 			 while(rs.next()){
 			 	
@@ -90,11 +80,50 @@ public class DB {
 				 afishim +="\t, Death Age: " + Death_Age + "\n";
 			 
 			 }
-		} catch (SQLException e) {
+		 } catch (SQLException e) {
 			e.printStackTrace();
-		}
+		 }
 		
 		return afishim;
 	
 	}
+	
+	public void WriteToDB(String Pres_name,String Party ,String State,String Birth_y,String Years_S ,String Death) {
+		sql = "INSERT INTO presidents VALUES (N'"+ 
+				Pres_name+"', N'"+Party +"', N'"+State +"', "+Birth_y+", "+Years_S +", "+Death +")";
+		try {
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void CloseCon() {
+		try{
+	        if(stmt!=null)
+	            stmt.close();
+	    }catch(SQLException se2){
+	    	se2.printStackTrace();
+	    }
+	    try{
+	        if(conn!=null)
+	            conn.close();
+	    }catch(SQLException se){
+	        se.printStackTrace();
+	    }
+	    System.out.println("DB connection closed");
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
