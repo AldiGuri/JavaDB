@@ -16,7 +16,7 @@ public class PanelFrame extends JFrame
     //DB CONNECTION INFO
     public String DB_URL = "jdbc:mysql://localhost:3306/?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
 	public String USER = "root";
-	public String PASS = "aldi1234";
+	public String PASS = "";
 	DB db = new DB(DB_URL, USER, PASS); 
 
     public PanelFrame()
